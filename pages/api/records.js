@@ -12,7 +12,7 @@ const getRecords = async () => {
 
 const getRecord = async (id) => {
     const collection = await getCollection(COLLECTION_NAME);
-    return collection.findOne({_id: ObjectId(id)});
+    return collection.findOne({_id: ObjectId.createFromHexString(id)});
 }
 
 const postRecord = async (record) => {
@@ -29,7 +29,7 @@ const putRecord = async (record) => {
 
 const deleteRecord = async (id) => {
 	const collection = await getCollection(COLLECTION_NAME);
-	return collection.deleteOne({_id: new ObjectId(id)});
+	return await collection.deleteOne({_id: ObjectId.createFromHexString(id)});
 }
 
 export default async function handler(req, res) {
